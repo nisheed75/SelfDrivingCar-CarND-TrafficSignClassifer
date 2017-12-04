@@ -30,13 +30,13 @@ The goals / steps of this project are the following:
 [image9]: ./resources/Hist_Train.png "Training Histogram" 
 [image10]: ./resources/Hist_Valid.png "Validation Histogram" 
 [image11]: ./resources/confusion_matrix_best.png "Confusion Matrix"
-[image12]: ./resources/webimages/20_speed_limit.jpg "Confusion Matrix"
-[image13]: ./resources/webimages/general_caution.jpg "Confusion Matrix"
-[image14]: ./resources/webimages/no_over_taking.jpg "Confusion Matrix"
-[image15]: ./resources/webimages/priority_road.jpg "Confusion Matrix"
-[image16]: ./resources/webimages/right_turn_ahead.jpg "Confusion Matrix"
-[image17]: ./resources/webimages/stop.jpg "Confusion Matrix"
-[image18]: ./resources/webimages/yield.jpg "Confusion Matrix"
+[image12]: ./resources/webimages/20_speed_limit.jpg "Speed limit (20km/h)"
+[image13]: ./resources/webimages/general_caution.jpg "General caution"
+[image14]: ./resources/webimages/no_overtaking.jpg "No passing"
+[image15]: ./resources/webimages/priority_road.jpg "Priority road"
+[image16]: ./resources/webimages/right_turn_ahead.jpg "Turn right ahead"
+[image17]: ./resources/webimages/stop.jpg "Stop"
+[image18]: ./resources/webimages/yield.jpg "Yield"
 
 ## Rubric Points
 ### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
