@@ -30,6 +30,13 @@ The goals / steps of this project are the following:
 [image9]: ./resources/Hist_Train.png "Training Histogram" 
 [image10]: ./resources/Hist_Valid.png "Validation Histogram" 
 [image11]: ./resources/confusion_matrix_best.png "Confusion Matrix"
+[image12]: ./resources/webimages/20_speed_limit.jpg "Confusion Matrix"
+[image13]: ./resources/webimages/general_caution.jpg "Confusion Matrix"
+[image14]: ./resources/webimages/no_over_taking.jpg "Confusion Matrix"
+[image15]: ./resources/webimages/priority_road.jpg "Confusion Matrix"
+[image16]: ./resources/webimages/right_turn_ahead.jpg "Confusion Matrix"
+[image17]: ./resources/webimages/stop.jpg "Confusion Matrix"
+[image18]: ./resources/webimages/yield.jpg "Confusion Matrix"
 
 ## Rubric Points
 ### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
@@ -194,7 +201,7 @@ To train the model, I used an iterative approch as follows:
 I started with LeNet becuase is performs well with image recognistion but i planned to iterarted and experiemnt with this to see what performace i could get with plain LeNet and then i tried a few steps to see if i could imporve on it. The process and changes I made are listed in the next section. 
 
 ##### Iterations and Changes Made
-1. Iteration 1: used plain LeNet with the training data set (with my generated images) this formed the basline for my experiments. I ran this for 40 EPOCHs to see what accuracy i could achieve.
+1. Iteration 1: I used plain LeNet with the training data set (with my generated images) this formed the basline for my experiments. I ran this for 40 EPOCHs to see what accuracy i could achieve.
 1. Iteration 2: I ran this for 100 EPOCHs with evrything else unchanged and i got an improvement in accuracy. This was expected as the increased number of training runs gave the model more data to look at.
 1. Iteration 3: I ran this for 150 EPOCHs with evrything else unchanged and i got a decline in accuracy. This was unexpected however i noticed that the best model was before the last EPOCH.
 1. Iteration 4: I added L2 regularization to try and make sure i getting the lowesrt possible error (minimizing my error), added early stopping and best model saving so that i always got the best model not mater where is the lifecycle of EPOCH it occured. I also changed the learing rate to see if I could get more accuracy faster. My accuracy results were worst than the previous iterations.
@@ -205,46 +212,46 @@ I started with LeNet becuase is performs well with image recognistion but i plan
 
 ##### Iteration Results and Parameters
 |Iteration | Model                    |Batch Size|Learn Rate|Epoch Limit|Acutal EPOCHs|Training Accuracy|Validation Accuracy|
-|:--------:|:------------------------:|:--------:|:--------:|:---------:|:-----------:|:---------------:|------------------:|
+|---------:|:------------------------:|---------:|---------:|----------:|------------:|----------------:|------------------:|
 |1         |LeNet                     |       128|     0.001|         40|           40|            0.964|              0.933|
 |2         |LeNet                     |       128|     0.001|        100|          100|            0.983|              0.946|
 |3         |LeNet                     |       128|     0.001|        150|          150|            0.947|              0.943|
 |4         |LeNet                     |       128|     0.005|        100|           88|            0.913|              0.889|
 |5         |ConVo (6 Layer)           |       128|     0.001|        100|          100|            0.774|              0.756|
 |6         |LeNet                     |       128|     0.005|        100|          100|            0.942|              0.933|
-|7         |LeNet                     |       128|     0.001|        100|           73|            0.988|              0.962|
+|7         |LeNet                     |       128|     0.001|        100|           73|            0.990|              0.964|
 
 ##### Final
 My final model results were:
-Train Accurary = 0.988, Validation Accuracy = 0.9615, Test Accuracy = 0.9456
+Train Accurary = 0.990, Validation Accuracy = 0.9635, Test Accuracy = 0.9418
 
 ##### Confusion Matix 
 The confusion Matrix below shows how the model performed against the validation data set.
 ![alt text][image11]
 
-If an iterative approach was chosen:
-* What was the first architecture that was tried and why was it chosen?
-* What were some problems with the initial architecture?
-* How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to overfitting or underfitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.
-* Which parameters were tuned? How were they adjusted and why?
-* What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
-
-If a well known architecture was chosen:
-* What architecture was chosen?
-* Why did you believe it would be relevant to the traffic sign application?
-* How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
+##### Summary
+The model perfomed adequetly in triaing and validation but this isn't enough evidence that it is valid model as the traing process allows the model to use the training and validation data set to create the model. However when the model ran on the test data set (images is is seeing for the first time) the model still maintained a ~95% accuracy. This shows that the model is good enough to recognize traffic signs with low error.
  
 
 ### Test a Model on New Images
 
 #### 1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
 
-Here are five German traffic signs that I found on the web:
+Here are seven German traffic signs that I found on the web:
 
-![alt text][image4] ![alt text][image5] ![alt text][image6] 
-![alt text][image7] ![alt text][image8]
+![alt text][image12] 
+![alt text][image13] 
+![alt text][image14] 
+![alt text][image15] 
+![alt text][image16]
+![alt text][image17]
+![alt text][image18]
 
-The first image might be difficult to classify because ...
+The first image might be difficult as following 
+1. The stop sign has a tree branch that is overlapping the sign boarder at the bottom.
+1. The genral caution has poor contrast with the background 
+1. The no passing, right turn ahead, stop, yield signs should be easy to classify as it very close to the training examples.
+1. The priority road sign has some discolouration on the yellow part of the sign so this could cause classification issues.  
 
 #### 2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
@@ -252,33 +259,70 @@ Here are the results of the prediction:
 
 | Image			        |     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| Stop Sign      		| Stop sign   									| 
-| U-turn     			| U-turn 										|
-| Yield					| Yield											|
-| 100 km/h	      		| Bumpy Road					 				|
-| Slippery Road			| Slippery Road      							|
+| Speed limit (20km/h)	| Speed limit (20km/h)							| 
+| General caution   	| General caution  								|
+| No Passing            | Np Passing                                    |
+| Priority Road			| Priority Road									|
+| Right Turn Ahead 		| Right Turn Ahead				 				|
+| Stop					| Stop			      							|
+| Yield					| Yield			      							|
 
 
-The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of ...
+The model was able to correctly guess 7 of the 7 traffic signs, which gives an accuracy of 100%. This compares favorably to the accuracy on the test set of 94.56%. These images are not that complex to predict so i was expecting a high accuracy with these images.
 
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
-The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
+The code for making predictions on my final model is located in the 89th cell of the Ipython notebook.
 
-For the first image, the model is relatively sure that this is a stop sign (probability of 0.6), and the image does contain a stop sign. The top five soft max probabilities were
+##### Top softmax probabilities:
+1. For the first image, the model was certain that this is a Speed limit (20km/h) sign (probability of 1.0)
+20_speed_limit.jpg:
+Probabilities
+[ 1.  0.  0.  0.  0.]
+Corresponding labels
+[0 1 2 3 4]
 
-| Probability         	|     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| .60         			| Stop sign   									| 
-| .20     				| U-turn 										|
-| .05					| Yield											|
-| .04	      			| Bumpy Road					 				|
-| .01				    | Slippery Road      							|
+1. For the second image, the model was certain that this is a General caution sign (probability of 1.0)
+general_caution.jpg:
+Probabilities
+[  1.00000000e+00   4.20215812e-34   0.00000000e+00   0.00000000e+00
+   0.00000000e+00]
+Corresponding labels
+[18 27  0  1  2]
 
 
-For the second image ... 
+1. For the third image, the model was certain that this is a No Passing sign (probability of 1.0)
+no_overtaking.jpg:
+Probabilities
+[ 1.  0.  0.  0.  0.]
+Corresponding labels
+[9 0 1 2 3]
 
-### (Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)
-#### 1. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?
+1. For the forth image, the model was certain that this is a Priority Road sign (probability of 1.0)
+priority_road.jpg:
+Probabilities
+[ 1.  0.  0.  0.  0.]
+Corresponding labels
+[12  0  1  2  3]
 
+1. For the fifth image, the model was certain that this is a Right Turn Ahead sign (probability of 1.0)
+right_turn_ahead.jpg:
+Probabilities
+[ 1.  0.  0.  0.  0.]
+Corresponding labels
+[33  0  1  2  3]
+
+1. For the sixth image, the model was certain that this is a Stop sign (probability of 1.0)
+stop.jpg:
+Probabilities
+[ 1.  0.  0.  0.  0.]
+Corresponding labels
+[14  0  1  2  3]
+
+1. For the seventh image, the model was certain that this is a Yield sign (probability of 1.0)
+yield.jpg:
+Probabilities
+[ 1.  0.  0.  0.  0.]
+Corresponding labels
+[13  0  1  2  3]
 
